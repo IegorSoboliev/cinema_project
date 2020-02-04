@@ -8,14 +8,13 @@ import com.dev.cinema.lib.Inject;
 import com.dev.cinema.lib.Service;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.service.MovieService;
-import com.dev.cinema.util.HibernateUtil;
 import org.apache.log4j.Logger;
 
 @Service
 public class MovieServiceImpl implements MovieService {
     @Inject
     private static MovieDao movieDao;
-    private static final Logger LOGGER = Logger.getLogger(HibernateUtil.class);
+    private static final Logger LOGGER = Logger.getLogger(MovieServiceImpl.class);
 
 
     public Movie add(Movie movie) {
@@ -26,7 +25,7 @@ public class MovieServiceImpl implements MovieService {
         try {
             return movieDao.getAll();
         } catch (DataProcessingException e) {
-            LOGGER.error("Cannot show all movies from database");
+            LOGGER.error("Cannot show all movies from database", e);
             throw new RuntimeException();
         }
     }
