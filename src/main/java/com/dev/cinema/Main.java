@@ -8,7 +8,7 @@ import com.dev.cinema.service.MovieService;
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
-    public static void main(String[] args) throws DataProcessingException {
+    public static void main(String[] args) {
 
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
@@ -16,7 +16,9 @@ public class Main {
         movie = movieService.add(movie);
 
         System.out.println(movie);
-
-        movieService.getAll().forEach(System.out ::println);
+        try {
+            movieService.getAll().forEach(System.out ::println);
+        } catch (DataProcessingException e) {
+        }
     }
 }
