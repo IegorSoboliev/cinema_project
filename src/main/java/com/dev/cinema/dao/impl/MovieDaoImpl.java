@@ -9,13 +9,11 @@ import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.util.HibernateUtil;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final Logger LOGGER = Logger.getLogger(MovieDaoImpl.class);
 
     public Movie add(Movie movie) {
         Transaction transaction = null;
@@ -29,8 +27,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction == null) {
                 transaction.rollback();
             }
-            LOGGER.error("Cannot add movie to database", e);
-            throw new RuntimeException();
+            throw new DataProcessingException("Cannot add movie to database", e);
         }
     }
 
@@ -41,7 +38,6 @@ public class MovieDaoImpl implements MovieDao {
             criteriaQuery.from(Movie.class);
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            LOGGER.error("Cannot show all movies from database");
             throw new DataProcessingException("Cannot show all movies from database", e);
         }
     }

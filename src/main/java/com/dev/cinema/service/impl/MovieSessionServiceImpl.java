@@ -4,17 +4,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.dev.cinema.dao.MovieSessionDao;
-import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.lib.Inject;
 import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.MovieSessionService;
-import org.apache.log4j.Logger;
 
 public class MovieSessionServiceImpl implements MovieSessionService {
     @Inject
     private static MovieSessionDao movieSessionDao;
-    private static final Logger LOGGER = Logger.getLogger(MovieSessionServiceImpl.class);
-
 
     @Override
     public MovieSession add(MovieSession movieSession) {
@@ -23,11 +19,6 @@ public class MovieSessionServiceImpl implements MovieSessionService {
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate showTime) {
-        try {
-            return movieSessionDao.findAvailableSessions(movieId, showTime);
-        } catch (DataProcessingException e) {
-            LOGGER.error("Cannot show movie sessions from database", e);
-            throw new RuntimeException();
-        }
+        return movieSessionDao.findAvailableSessions(movieId, showTime);
     }
 }
