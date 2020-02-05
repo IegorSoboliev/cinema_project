@@ -1,8 +1,8 @@
 package com.dev.cinema.exceptions;
 
-public class DataProcessingException extends Exception {
+public class DataProcessingException extends RuntimeException {
 
-    public DataProcessingException(String message) {
+    public DataProcessingException(String message, Exception e) {
         super(message);
     }
 }
