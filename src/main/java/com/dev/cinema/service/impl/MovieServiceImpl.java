@@ -13,7 +13,6 @@ public class MovieServiceImpl implements MovieService {
     @Inject
     private static MovieDao movieDao;
 
-
     public Movie add(Movie movie) {
         return movieDao.add(movie);
     }
