@@ -40,7 +40,6 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate showTime)
             throws DataProcessingException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.get(MovieSession.class, movieId); //is that redundant??
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<MovieSession> cq = cb.createQuery(MovieSession.class);
             Root<MovieSession> root = cq.from(MovieSession.class);
