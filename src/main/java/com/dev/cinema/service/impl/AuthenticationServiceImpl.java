@@ -1,12 +1,12 @@
 package com.dev.cinema.service.impl;
 
-import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.lib.Inject;
 import com.dev.cinema.lib.Service;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.AuthenticationService;
+import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.util.HashUtil;
 
@@ -14,6 +14,8 @@ import com.dev.cinema.util.HashUtil;
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private static UserService userService;
+    @Inject
+    private static ShoppingCartService shoppingCartService;
 
     public User login(String email, String password) throws AuthenticationException {
         User user = userService.findByEmail(email);
@@ -31,6 +33,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        return userService.add(user);
+        User userRegistered = userService.add(user);
+        shoppingCartService.registerNewShoppingCart(userRegistered);
+        return userRegistered;
     }
 }
