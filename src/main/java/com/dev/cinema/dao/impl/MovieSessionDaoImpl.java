@@ -29,7 +29,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             movieSession.setId(id);
             return movieSession;
         } catch (Exception e) {
-            if (transaction == null) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Cannot add movie session to database", e);
@@ -40,8 +40,6 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate showTime)
             throws DataProcessingException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.get(MovieSession.class, movieId);
-
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<MovieSession> cq = cb.createQuery(MovieSession.class);
             Root<MovieSession> root = cq.from(MovieSession.class);
