@@ -2,18 +2,24 @@ package com.dev.cinema;
 
 import java.time.LocalDateTime;
 
+import com.dev.cinema.exceptions.AuthenticationException;
+import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.User;
+import com.dev.cinema.service.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import org.apache.log4j.Logger;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
     public static void main(String[] args) {
+        Logger LOGGER = Logger.getLogger(Main.class);
 
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
@@ -38,5 +44,20 @@ public class Main {
                 showTime.toLocalDate()).forEach(System.out::println);
 
         System.out.println(cinemaHall);
+
+        AuthenticationService authenticationService =
+                (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        try {
+            User user = authenticationService.register("pavlo@yahoo.com", "1");
+            System.out.println(user);
+        } catch (EmailAlreadyRegisteredException e) {
+            LOGGER.error("Cannot add user to database");
+        }
+        try {
+            User userRegistered = authenticationService.login("pavlo@yahoo.com", "1");
+            System.out.println(userRegistered);
+        } catch (AuthenticationException e) {
+            LOGGER.error("Wrong login or email");
+        }
     }
 }
