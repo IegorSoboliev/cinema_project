@@ -43,8 +43,6 @@ public class Main {
         movieSessionService.findAvailableSessions(1L,
                 showTime.toLocalDate()).forEach(System.out::println);
 
-        System.out.println(cinemaHall);
-
         AuthenticationService authenticationService =
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
         try {
