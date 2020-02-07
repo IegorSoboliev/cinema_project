@@ -1,6 +1,7 @@
 package com.dev.cinema;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
@@ -76,6 +77,8 @@ public class Main {
                 (OrderService) injector.getInstance(OrderService.class);
         Order order =
                 orderService.completeOrder(shoppingCart.getTickets(), user);
+        List<Order> userOrders = orderService.getOrderHistory(user);
         System.out.print(order);
+        System.out.print(userOrders);
     }
 }
