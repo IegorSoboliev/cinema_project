@@ -11,7 +11,7 @@ import com.dev.cinema.service.MovieService;
 @Service
 public class MovieServiceImpl implements MovieService {
     @Inject
-    private static MovieDao movieDao;
+    private MovieDao movieDao;
 
     public Movie add(Movie movie) {
         return movieDao.add(movie);

@@ -10,7 +10,7 @@ import com.dev.cinema.service.MovieSessionService;
 
 public class MovieSessionServiceImpl implements MovieSessionService {
     @Inject
-    private static MovieSessionDao movieSessionDao;
+    private MovieSessionDao movieSessionDao;
 
     @Override
     public MovieSession add(MovieSession movieSession) {
