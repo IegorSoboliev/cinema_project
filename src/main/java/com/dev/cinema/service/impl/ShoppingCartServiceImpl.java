@@ -15,9 +15,9 @@ import com.dev.cinema.service.ShoppingCartService;
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Inject
-    private static ShoppingCartDao shoppingCartDao;
+    private ShoppingCartDao shoppingCartDao;
     @Inject
-    private static TicketDao ticketDao;
+    private TicketDao ticketDao;
 
 
     @Override

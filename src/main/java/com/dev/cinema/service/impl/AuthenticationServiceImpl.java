@@ -13,9 +13,9 @@ import com.dev.cinema.util.HashUtil;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
-    private static UserService userService;
+    private UserService userService;
     @Inject
-    private static ShoppingCartService shoppingCartService;
+    private ShoppingCartService shoppingCartService;
 
     public User login(String email, String password) throws AuthenticationException {
         User user = userService.findByEmail(email);
