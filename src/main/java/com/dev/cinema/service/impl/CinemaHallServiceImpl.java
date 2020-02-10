@@ -11,7 +11,7 @@ import com.dev.cinema.service.CinemaHallService;
 @Service
 public class CinemaHallServiceImpl implements CinemaHallService {
     @Inject
-    private static CinemHallDao cinemHallDao;
+    private CinemHallDao cinemHallDao;
 
 
     @Override
