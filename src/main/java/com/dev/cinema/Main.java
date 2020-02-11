@@ -1,8 +1,5 @@
 package com.dev.cinema;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.lib.Injector;
@@ -18,14 +15,18 @@ import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
 import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
-import com.dev.cinema.util.HibernateUtil;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+
 import org.apache.log4j.Logger;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
     public static void main(String[] args) {
-        Logger LOGGER = Logger.getLogger(Main.class);
+        Logger logger = Logger.getLogger(Main.class);
 
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
@@ -58,13 +59,13 @@ public class Main {
             user = authenticationService.register("pavlo@yahoo.com", "1");
             System.out.println(user);
         } catch (EmailAlreadyRegisteredException e) {
-            LOGGER.error("Cannot add user to database");
+            logger.error("Cannot add user to database");
         }
         try {
             User userRegistered = authenticationService.login("pavlo@yahoo.com", "1");
             System.out.println(userRegistered);
         } catch (AuthenticationException e) {
-            LOGGER.error("Wrong login or email");
+            logger.error("Wrong login or email");
         }
         ShoppingCartService shoppingCartService =
                 (ShoppingCartService) injector.getInstance(ShoppingCartService.class);

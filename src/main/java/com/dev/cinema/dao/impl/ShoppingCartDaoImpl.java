@@ -1,7 +1,5 @@
 package com.dev.cinema.dao.impl;
 
-import java.util.List;
-
 import com.dev.cinema.dao.ShoppingCartDao;
 import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.lib.Dao;
@@ -9,6 +7,9 @@ import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.Ticket;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
+
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -35,12 +36,12 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public ShoppingCart getByUser(User user) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            ShoppingCart shoppingCart = session.createQuery
-                    ("FROM ShoppingCart WHERE user = :user", ShoppingCart.class)
+            ShoppingCart shoppingCart = session.createQuery("FROM ShoppingCart "
+                    + "WHERE user = :user", ShoppingCart.class)
                     .setParameter("user", user)
                     .uniqueResult();
-            List<Ticket> tickets = session.createQuery
-                    ("FROM Ticket WHERE user = :user", Ticket.class)
+            List<Ticket> tickets = session.createQuery("FROM Ticket "
+                    + "WHERE user = :user", Ticket.class)
                     .setParameter("user", user)
                     .getResultList();
             shoppingCart.setTickets(tickets);

@@ -1,9 +1,9 @@
 package com.dev.cinema.dao;
 
-import java.util.List;
-
 import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.model.Movie;
+
+import java.util.List;
 
 public interface MovieDao {
 
