@@ -23,9 +23,9 @@ import org.apache.log4j.Logger;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
+    private static final Logger LOGGER = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
-        Logger logger = Logger.getLogger(Main.class);
 
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
@@ -58,13 +58,13 @@ public class Main {
             user = authenticationService.register("pavlo@yahoo.com", "1");
             System.out.println(user);
         } catch (EmailAlreadyRegisteredException e) {
-            logger.error("Cannot add user to database");
+            LOGGER.error("Cannot add user to database");
         }
         try {
             User userRegistered = authenticationService.login("pavlo@yahoo.com", "1");
             System.out.println(userRegistered);
         } catch (AuthenticationException e) {
-            logger.error("Wrong login or email");
+            LOGGER.error("Wrong login or email");
         }
         ShoppingCartService shoppingCartService =
                 (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
