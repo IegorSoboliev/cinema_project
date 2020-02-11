@@ -19,7 +19,6 @@ import com.dev.cinema.service.ShoppingCartService;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 import org.apache.log4j.Logger;
 
 public class Main {
