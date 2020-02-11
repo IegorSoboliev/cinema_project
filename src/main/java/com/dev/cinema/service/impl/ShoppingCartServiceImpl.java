@@ -1,7 +1,5 @@
 package com.dev.cinema.service.impl;
 
-import java.util.ArrayList;
-
 import com.dev.cinema.dao.ShoppingCartDao;
 import com.dev.cinema.dao.TicketDao;
 import com.dev.cinema.lib.Inject;
@@ -12,13 +10,14 @@ import com.dev.cinema.model.Ticket;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.ShoppingCartService;
 
+import java.util.ArrayList;
+
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Inject
     private ShoppingCartDao shoppingCartDao;
     @Inject
     private TicketDao ticketDao;
-
 
     @Override
     public void addSession(MovieSession movieSession, User user) {
@@ -49,5 +48,4 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCartDao.update(shoppingCart);
         return shoppingCart;
     }
-
 }

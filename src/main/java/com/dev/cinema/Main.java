@@ -1,8 +1,5 @@
 package com.dev.cinema;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.lib.Injector;
@@ -18,14 +15,17 @@ import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
 import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
-import com.dev.cinema.util.HibernateUtil;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
+    private static final Logger LOGGER = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
-        Logger LOGGER = Logger.getLogger(Main.class);
 
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
@@ -78,7 +78,6 @@ public class Main {
         Order order =
                 orderService.completeOrder(shoppingCart.getTickets(), user);
         List<Order> userOrders = orderService.getOrderHistory(user);
-        System.out.print(order);
         System.out.print(userOrders);
     }
 }
