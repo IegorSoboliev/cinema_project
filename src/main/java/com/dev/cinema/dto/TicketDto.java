@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class TicketDto {
     private String movieTitle;
     private Long cinemaHallId;
-    private LocalDateTime dateTime;
+    private LocalDateTime showTime;
 
     public String getMovieTitle() {
         return movieTitle;
@@ -23,11 +23,11 @@ public class TicketDto {
         this.cinemaHallId = cinemaHallId;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDateTime getShowTime() {
+        return showTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setShowTime(LocalDateTime showTime) {
+        this.showTime = showTime;
     }
 }

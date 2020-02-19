@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("orders")
+@RestController("/orders")
 public class OrderController {
     private OrderService orderService;
     private UserService userService;
@@ -31,7 +31,7 @@ public class OrderController {
         orderService.completeOrder(tickets, user);
     }
 
-    @GetMapping("/")
+    @GetMapping("/userOrders")
     List<OrderDto> getUserOrders(@RequestParam("userId") Long userId) {
         User user = userService.getById(userId);
         return orderService.getOrderHistory(user)
@@ -55,7 +55,7 @@ public class OrderController {
         TicketDto ticketDto = new TicketDto();
         MovieSession movieSession = ticket.getMovieSession();
         ticketDto.setMovieTitle(movieSession.getMovie().getTitle());
-        ticketDto.setDateTime(movieSession.getShowTime());
+        ticketDto.setShowTime(movieSession.getShowTime());
         ticketDto.setCinemaHallId(movieSession.getCinemaHall().getId());
         return ticketDto;
     }

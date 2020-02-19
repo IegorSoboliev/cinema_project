@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
     private AuthenticationService authenticationService;
-    private Logger logger = Logger.getLogger(AuthenticationController.class);
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationController.class);
 
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
@@ -24,8 +24,7 @@ public class AuthenticationController {
         try {
             authenticationService.login(userRequestDto.getEmail(), userRequestDto.getPassword());
         } catch (AuthenticationException e) {
-            logger.error("Wrong email or password", e);
-            throw new RuntimeException("Wrong email or password", e);
+            LOGGER.error("Wrong email or password", e);
         }
         return "Welcome!";
     }
@@ -36,8 +35,7 @@ public class AuthenticationController {
             authenticationService.register(userRequestDto.getEmail(),
                     userRequestDto.getPassword());
         } catch (EmailAlreadyRegisteredException e) {
-            logger.error("This email already registered", e);
-            throw new RuntimeException("This email already registered");
+            LOGGER.error("This email already registered", e);
         }
         return "Welcome!";
     }

@@ -20,7 +20,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/add")
     public void addMovie(@RequestBody MovieDto movieDto) {
         Movie movie = new Movie();
         movie.setTitle(movieDto.getTitle());
@@ -28,7 +28,7 @@ public class MovieController {
         movieService.add(movie);
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public List<MovieDto> getAllMovies() {
         return movieService.getAll()
                 .stream()

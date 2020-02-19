@@ -71,7 +71,7 @@ public class ShoppingCartController {
         TicketDto ticketDto = new TicketDto();
         MovieSession movieSession = ticket.getMovieSession();
         ticketDto.setMovieTitle(movieSession.getMovie().getTitle());
-        ticketDto.setDateTime(movieSession.getShowTime());
+        ticketDto.setShowTime(movieSession.getShowTime());
         ticketDto.setCinemaHallId(movieSession.getCinemaHall().getId());
         return ticketDto;
     }
