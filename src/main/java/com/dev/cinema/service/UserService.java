@@ -6,6 +6,7 @@ public interface UserService {
 
     User add(User user);
 
-    User findByEmail(String email);
+    User getByEmail(String email);
 
+    User getById(Long userId);
 }
