@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/cinemahalls")
+@RestController
+@RequestMapping("/cinemahalls")
 public class CinemaHallController {
     private CinemaHallService cinemaHallService;
 

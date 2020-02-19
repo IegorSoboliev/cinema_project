@@ -15,14 +15,24 @@ import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/orders")
+@RestController
+@RequestMapping("/orders")
 public class OrderController {
     private OrderService orderService;
     private UserService userService;
     private ShoppingCartService shoppingCartService;
+
+    public OrderController(OrderService orderService,
+                           UserService userService,
+                           ShoppingCartService shoppingCartService) {
+        this.orderService = orderService;
+        this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
+    }
 
     @PostMapping("/complete")
     public void completeOrder(@RequestParam("userId") Long userId) {

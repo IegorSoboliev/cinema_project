@@ -8,10 +8,12 @@ import com.dev.cinema.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/users")
+@RestController
+@RequestMapping("/users")
 public class UserController {
     private UserService userService;
 
@@ -19,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/add")
     public void addUser(@RequestBody UserRequestDto userRequestDto) {
         User user = new User();
         user.setEmail(userRequestDto.getEmail());
@@ -27,7 +29,7 @@ public class UserController {
         userService.add(user);
     }
 
-    @GetMapping ("/byemail")
+    @GetMapping("/byemail")
     public UserResponseDto getUserByEmail(@RequestParam("email") String email) {
         User user = userService.getByEmail(email);
         UserResponseDto userResponseDto = new UserResponseDto();
