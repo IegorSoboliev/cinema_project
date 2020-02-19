@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class CinemaHallController {
     }
 
     @PostMapping("/add")
-    public void addCinemaHall(CinemaHallDto cinemaHallDto) {
+    public void addCinemaHall(@RequestBody CinemaHallDto cinemaHallDto) {
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(cinemaHallDto.getCapacity());
         cinemaHall.setDescription(cinemaHallDto.getDescription());
