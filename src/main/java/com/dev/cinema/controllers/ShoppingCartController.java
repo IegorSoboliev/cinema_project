@@ -42,7 +42,7 @@ public class ShoppingCartController {
         this.userService = userService;
     }
 
-    @PostMapping("/addmoviesession")
+    @PostMapping("/moviesession")
     public void addMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto,
                                 @RequestParam("userId") Long userId) {
         MovieSession movieSession = new MovieSession();
@@ -56,7 +56,7 @@ public class ShoppingCartController {
         shoppingCartService.addSession(movieSession, user);
     }
 
-    @GetMapping("/byuser")
+    @GetMapping("/user-shoppingcart")
     public ShoppingCartResponseDto getByUserId(@RequestParam("userId") Long userId) {
         User user = userService.getById(userId);
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);

@@ -22,7 +22,7 @@ public class CinemaHallController {
         this.cinemaHallService = cinemaHallService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/cinemahall")
     public void addCinemaHall(@RequestBody CinemaHallDto cinemaHallDto) {
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(cinemaHallDto.getCapacity());
