@@ -14,6 +14,7 @@ import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class ShoppingCartController {
         CinemaHall cinemaHall =
                 cinemaHallService.getById(movieSessionRequestDto.getCinemaHallId());
         movieSession.setCinemaHall(cinemaHall);
-        movieSession.setShowTime(movieSessionRequestDto.getShowTime());
+        movieSession.setShowTime(LocalDateTime.parse(movieSessionRequestDto.getShowTime()));
         User user = userService.getById(userId);
         shoppingCartService.addSession(movieSession, user);
     }
@@ -73,7 +74,7 @@ public class ShoppingCartController {
         TicketDto ticketDto = new TicketDto();
         MovieSession movieSession = ticket.getMovieSession();
         ticketDto.setMovieTitle(movieSession.getMovie().getTitle());
-        ticketDto.setShowTime(movieSession.getShowTime());
+        ticketDto.setShowTime(movieSession.getShowTime().toString());
         ticketDto.setCinemaHallId(movieSession.getCinemaHall().getId());
         return ticketDto;
     }

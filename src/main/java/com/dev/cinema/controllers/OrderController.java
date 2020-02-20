@@ -24,14 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     private OrderService orderService;
     private UserService userService;
-    private ShoppingCartService shoppingCartService;
 
     public OrderController(OrderService orderService,
                            UserService userService,
                            ShoppingCartService shoppingCartService) {
         this.orderService = orderService;
         this.userService = userService;
-        this.shoppingCartService = shoppingCartService;
     }
 
     @PostMapping("/complete")
@@ -63,7 +61,7 @@ public class OrderController {
         TicketDto ticketDto = new TicketDto();
         MovieSession movieSession = ticket.getMovieSession();
         ticketDto.setMovieTitle(movieSession.getMovie().getTitle());
-        ticketDto.setShowTime(movieSession.getShowTime());
+        ticketDto.setShowTime(movieSession.getShowTime().toString());
         ticketDto.setCinemaHallId(movieSession.getCinemaHall().getId());
         return ticketDto;
     }

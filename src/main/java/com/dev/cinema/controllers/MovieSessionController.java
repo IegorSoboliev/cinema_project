@@ -10,6 +10,7 @@ import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,7 @@ public class MovieSessionController {
         CinemaHall cinemaHall =
                 cinemaHallService.getById(movieSessionRequestDto.getCinemaHallId());
         movieSession.setCinemaHall(cinemaHall);
-        movieSession.setShowTime(movieSessionRequestDto.getShowTime());
+        movieSession.setShowTime(LocalDateTime.parse(movieSessionRequestDto.getShowTime()));
         movieSessionService.add(movieSession);
     }
 
@@ -58,7 +59,7 @@ public class MovieSessionController {
     private MovieSessionResponseDto transformToDto(MovieSession movieSession) {
         MovieSessionResponseDto movieSessionResponseDto = new MovieSessionResponseDto();
         movieSessionResponseDto.setMovieTitle(movieSession.getMovie().getTitle());
-        movieSessionResponseDto.setShowTime(movieSession.getShowTime());
+        movieSessionResponseDto.setShowTime(movieSession.getShowTime().toString());
         movieSessionResponseDto.setCinemaHallId(movieSession.getCinemaHall().getId());
         return movieSessionResponseDto;
     }
