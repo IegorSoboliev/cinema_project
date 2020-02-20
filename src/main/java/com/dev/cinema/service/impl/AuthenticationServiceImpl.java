@@ -22,7 +22,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public User login(String email, String password) throws AuthenticationException {
-        User user = userService.findByEmail(email);
+        User user = userService.getByEmail(email);
         if (user == null
                 || !user.getPassword().equals(HashUtil.hashPassword(password, user.getSalt()))) {
             throw new AuthenticationException("Wrong email or password");
@@ -31,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public User register(String email, String password) throws EmailAlreadyRegisteredException {
-        if (userService.findByEmail(email) != null) {
+        if (userService.getByEmail(email) != null) {
             throw new EmailAlreadyRegisteredException("This email already registered");
         }
         User user = new User();

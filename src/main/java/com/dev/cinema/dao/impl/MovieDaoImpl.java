@@ -21,6 +21,7 @@ public class MovieDaoImpl implements MovieDao {
         this.sessionFactory = sessionFactory;
     }
 
+    @Override
     public Movie add(Movie movie) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
@@ -37,6 +38,7 @@ public class MovieDaoImpl implements MovieDao {
         }
     }
 
+    @Override
     public List<Movie> getAll() throws DataProcessingException {
         try (Session session = sessionFactory.openSession()) {
             CriteriaQuery<Movie> criteriaQuery =
@@ -45,6 +47,15 @@ public class MovieDaoImpl implements MovieDao {
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Cannot show all movies from database", e);
+        }
+    }
+
+    @Override
+    public Movie getById(Long movieId) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Movie.class, movieId);
+        } catch (Exception e) {
+            throw new DataProcessingException("Cannot show movie from database", e);
         }
     }
 }

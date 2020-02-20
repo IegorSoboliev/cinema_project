@@ -10,4 +10,6 @@ public interface CinemHallDao {
     CinemaHall add(CinemaHall cinemaHall);
 
     List<CinemaHall> getAll() throws DataProcessingException;
+
+    CinemaHall getById(Long cinemaHallId);
 }

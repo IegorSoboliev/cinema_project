@@ -16,11 +16,17 @@ public class MovieServiceImpl implements MovieService {
         this.movieDao = movieDao;
     }
 
+    @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
     }
 
+    @Override
     public List<Movie> getAll() {
         return movieDao.getAll();
+    }
+
+    public Movie getById(Long movieId) {
+        return movieDao.getById(movieId);
     }
 }

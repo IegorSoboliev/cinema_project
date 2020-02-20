@@ -10,4 +10,5 @@ public interface MovieService {
 
     List<Movie> getAll();
 
+    Movie getById(Long movieId);
 }
