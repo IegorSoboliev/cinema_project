@@ -4,7 +4,6 @@ import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.model.Order;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.AuthenticationService;
@@ -45,7 +44,7 @@ public class DataInjectionController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/inject")
+    @GetMapping("/data")
     public String addData() throws EmailAlreadyRegisteredException {
         authenticationService.register("pavlo@yahoo.com", "1");
         Movie movie = new Movie();
@@ -65,7 +64,7 @@ public class DataInjectionController {
         User user = userService.getByEmail("pavlo@yahoo.com");
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
         shoppingCartService.addSession(movieSession, user);
-        Order order = orderService.completeOrder(user);
-        return orderService.getOrderHistory(user.getId()).toString();
+        orderService.completeOrder(user);
+        return orderService.getOrdersHistory(user.getId()).toString();
     }
 }

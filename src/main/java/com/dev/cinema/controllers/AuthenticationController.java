@@ -21,7 +21,7 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/authentication")
     public String login(@RequestBody UserRequestDto userRequestDto) {
         try {
             authenticationService.login(userRequestDto.getEmail(), userRequestDto.getPassword());
@@ -31,7 +31,7 @@ public class AuthenticationController {
         return "Welcome!";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/registration")
     public String register(@RequestBody UserRequestDto userRequestDto) {
         try {
             authenticationService.register(userRequestDto.getEmail(),

@@ -32,7 +32,7 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping("/complete")
+    @PostMapping("/order")
     public void completeOrder(@RequestParam("userId") Long userId) {
         User user = userService.getById(userId);
         orderService.completeOrder(user);
@@ -40,7 +40,7 @@ public class OrderController {
 
     @GetMapping("/userOrders")
     List<OrderDto> getUserOrders(@RequestParam("userId") Long userId) {
-        return orderService.getOrderHistory(userId)
+        return orderService.getOrdersHistory(userId)
                 .stream()
                 .map(this::transformToDto)
                 .collect(Collectors.toList());
