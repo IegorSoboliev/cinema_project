@@ -1,5 +1,8 @@
 package com.dev.cinema.annotations;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -10,6 +13,10 @@ public class EmailValidator implements ConstraintValidator<EmailConstraint, Stri
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        return s != null && s.contains("@");
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@"
+                + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
     }
 }

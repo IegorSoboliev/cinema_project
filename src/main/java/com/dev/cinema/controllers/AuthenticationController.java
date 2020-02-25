@@ -1,8 +1,8 @@
 package com.dev.cinema.controllers;
 
+import com.dev.cinema.dto.UserRegistrationDto;
 import com.dev.cinema.dto.UserRequestDto;
 import com.dev.cinema.exceptions.AuthenticationException;
-import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.service.AuthenticationService;
 
@@ -35,13 +35,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/registration")
-    public String register(@RequestBody @Valid UserRequestDto userRequestDto) {
+    public String register(@RequestBody @Valid UserRegistrationDto userRegistrationDto) {
         try {
-            if (!userRequestDto.getPassword().equals(userRequestDto.getRepeatePassword())) {
-                throw new DataProcessingException("Repeate the same password, please");
-            }
-            authenticationService.register(userRequestDto.getEmail(),
-                    userRequestDto.getPassword());
+            authenticationService.register(userRegistrationDto.getEmail(),
+                    userRegistrationDto.getPassword());
         } catch (EmailAlreadyRegisteredException e) {
             LOGGER.warn("This email already registered", e);
         }

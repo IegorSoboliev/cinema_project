@@ -1,5 +1,6 @@
 package com.dev.cinema.service.impl;
 
+import com.dev.cinema.dao.RoleDao;
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.model.User;
@@ -15,13 +16,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private UserService userService;
     private ShoppingCartService shoppingCartService;
     private PasswordEncoder passwordEncoder;
+    private RoleDao roleDao;
 
-    public AuthenticationServiceImpl(UserService userService,
-                                     ShoppingCartService shoppingCartService,
-                                     PasswordEncoder passwordEncoder) {
+    public AuthenticationServiceImpl(UserService userService, ShoppingCartService
+            shoppingCartService, PasswordEncoder passwordEncoder, RoleDao roleDao) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
         this.passwordEncoder = passwordEncoder;
+        this.roleDao = roleDao;
     }
 
     public User login(String email, String password) throws AuthenticationException {
@@ -39,7 +41,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         User user = new User();
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
+        user.addRole(roleDao.getByRoleName("USER"));
         User userRegistered = userService.add(user);
         shoppingCartService.registerNewShoppingCart(userRegistered);
         return userRegistered;

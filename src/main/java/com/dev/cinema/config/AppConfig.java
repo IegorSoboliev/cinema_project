@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -19,11 +21,17 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
         "com.dev.cinema.dao",
         "com.dev.cinema.service",
         "com.dev.cinema.controllers",
-        "com.dev.cinema.security"
+        "com.dev.cinema.security",
+        "com.dev.cinema.config"
 })
 public class AppConfig {
     @Autowired
     private Environment environment;
+
+    @Bean
+    public PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public DataSource getDataSource() {
