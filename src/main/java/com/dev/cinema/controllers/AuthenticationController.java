@@ -2,8 +2,11 @@ package com.dev.cinema.controllers;
 
 import com.dev.cinema.dto.UserRequestDto;
 import com.dev.cinema.exceptions.AuthenticationException;
+import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.service.AuthenticationService;
+
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,22 +25,25 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authentication")
-    public String login(@RequestBody UserRequestDto userRequestDto) {
+    public String login(@RequestBody @Valid UserRequestDto userRequestDto) {
         try {
             authenticationService.login(userRequestDto.getEmail(), userRequestDto.getPassword());
         } catch (AuthenticationException e) {
-            LOGGER.error("Wrong email or password", e);
+            LOGGER.warn("Wrong email or password", e);
         }
         return "Welcome!";
     }
 
     @PostMapping("/registration")
-    public String register(@RequestBody UserRequestDto userRequestDto) {
+    public String register(@RequestBody @Valid UserRequestDto userRequestDto) {
         try {
+            if (!userRequestDto.getPassword().equals(userRequestDto.getRepeatePassword())) {
+                throw new DataProcessingException("Repeate the same password, please");
+            }
             authenticationService.register(userRequestDto.getEmail(),
                     userRequestDto.getPassword());
         } catch (EmailAlreadyRegisteredException e) {
-            LOGGER.error("This email already registered", e);
+            LOGGER.warn("This email already registered", e);
         }
         return "Welcome!";
     }

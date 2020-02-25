@@ -18,11 +18,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -43,8 +45,8 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/moviesession")
-    public void addMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto,
-                                @RequestParam("userId") Long userId) {
+    public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto,
+                                Authentication authentication) {
         MovieSession movieSession = new MovieSession();
         Movie movie = movieService.getById(movieSessionRequestDto.getMovieId());
         movieSession.setMovie(movie);
@@ -52,20 +54,20 @@ public class ShoppingCartController {
                 cinemaHallService.getById(movieSessionRequestDto.getCinemaHallId());
         movieSession.setCinemaHall(cinemaHall);
         movieSession.setShowTime(LocalDateTime.parse(movieSessionRequestDto.getShowTime()));
-        User user = userService.getById(userId);
+        User user = userService.getByEmail(authentication.getName());
         shoppingCartService.addSession(movieSession, user);
     }
 
     @GetMapping("/user-shoppingcart")
-    public ShoppingCartResponseDto getByUserId(@RequestParam("userId") Long userId) {
-        User user = userService.getById(userId);
+    public ShoppingCartResponseDto getByUserId(Authentication authentication) {
+        User user = userService.getByEmail(authentication.getName());
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
         List<TicketDto> ticketsDto = shoppingCart.getTickets()
                 .stream()
                 .map(this::transformToTicketsDto)
                 .collect(Collectors.toList());
         ShoppingCartResponseDto shoppingCartResponseDto = new ShoppingCartResponseDto();
-        shoppingCartResponseDto.setUserId(userId);
+        shoppingCartResponseDto.setUserId(user.getId());
         shoppingCartResponseDto.setTicketsDto(ticketsDto);
         return shoppingCartResponseDto;
     }

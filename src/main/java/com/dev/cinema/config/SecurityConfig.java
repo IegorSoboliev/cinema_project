@@ -6,19 +6,27 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private UserDetailsService userDetailsService;
+
+    public SecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Bean
+    public PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authBuilder) throws Exception {
-        authBuilder.inMemoryAuthentication()
-                .passwordEncoder(getEncoder())
-                .withUser("sofia")
-                .password(getEncoder().encode("1"))
-                .roles("USER");
+        authBuilder.userDetailsService(userDetailsService)
+                .passwordEncoder(getEncoder());
     }
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -29,11 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .permitAll()
                 .and()
-                .httpBasic();
-    }
-
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
+                .httpBasic()
+                .and()
+                .csrf().disable();
     }
 }

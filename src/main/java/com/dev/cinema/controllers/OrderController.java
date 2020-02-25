@@ -13,10 +13,10 @@ import com.dev.cinema.service.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,14 +33,15 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public void completeOrder(@RequestParam("userId") Long userId) {
-        User user = userService.getById(userId);
+    public void completeOrder(Authentication authentication) {
+        User user = userService.getByEmail(authentication.getName());
         orderService.completeOrder(user);
     }
 
     @GetMapping("/userOrders")
-    List<OrderDto> getUserOrders(@RequestParam("userId") Long userId) {
-        return orderService.getOrdersHistory(userId)
+    List<OrderDto> getUserOrders(Authentication authentication) {
+        User user = userService.getByEmail(authentication.getName());
+        return orderService.getOrdersHistory(user)
                 .stream()
                 .map(this::transformToDto)
                 .collect(Collectors.toList());
