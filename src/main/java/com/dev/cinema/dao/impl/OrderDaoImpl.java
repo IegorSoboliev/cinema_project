@@ -3,6 +3,7 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.OrderDao;
 import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.model.Order;
+import com.dev.cinema.model.User;
 
 import java.util.List;
 
@@ -41,13 +42,13 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> getOrderHistory(Long userId) {
+    public List<Order> getOrderHistory(User user) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Order> criteria = builder.createQuery(Order.class);
             Root<Order> root = criteria.from(Order.class);
             root.fetch("tickets", JoinType.LEFT);
-            criteria.select(root).where(builder.equal(root.get("user"), userId));
+            criteria.select(root).where(builder.equal(root.get("user"), user));
             return session.createQuery(criteria).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Couldn't show user orders", e);

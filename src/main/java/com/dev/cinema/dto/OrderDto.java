@@ -1,11 +1,15 @@
 package com.dev.cinema.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 public class OrderDto {
     private Long id;
-    private List<TicketDto> ticketsDto;
+    private List<TicketDto> ticketsDto = new ArrayList<>();
+    @NotNull
     private LocalDate orderDate;
 
     public Long getId() {

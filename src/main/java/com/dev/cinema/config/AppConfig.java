@@ -1,13 +1,5 @@
 package com.dev.cinema.config;
 
-import com.dev.cinema.model.CinemaHall;
-import com.dev.cinema.model.Movie;
-import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.model.Order;
-import com.dev.cinema.model.ShoppingCart;
-import com.dev.cinema.model.Ticket;
-import com.dev.cinema.model.User;
-
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -20,17 +12,26 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @PropertySource("classpath:db.properties")
 @ComponentScan(basePackages = {
         "com.dev.cinema.dao",
         "com.dev.cinema.service",
-        "com.dev.cinema.controllers"
+        "com.dev.cinema.controllers",
+        "com.dev.cinema.security",
+        "com.dev.cinema.config"
 })
 public class AppConfig {
     @Autowired
     private Environment environment;
+
+    @Bean
+    public PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public DataSource getDataSource() {
@@ -51,8 +52,7 @@ public class AppConfig {
         properties.put("hibernate.hbm2ddl.auto",
                 environment.getProperty("hibernate.hbm2ddl.auto"));
         sessionFactoryBean.setHibernateProperties(properties);
-        sessionFactoryBean.setAnnotatedClasses(User.class, Ticket.class, ShoppingCart.class,
-                Order.class, MovieSession.class, Movie.class, CinemaHall.class);
+        sessionFactoryBean.setPackagesToScan("com.dev.cinema.model");
         return sessionFactoryBean;
     }
 }
