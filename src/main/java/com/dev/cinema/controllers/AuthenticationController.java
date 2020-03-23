@@ -5,9 +5,7 @@ import com.dev.cinema.dto.UserRequestDto;
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.service.AuthenticationService;
-
 import javax.validation.Valid;
-
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

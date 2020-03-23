@@ -33,9 +33,7 @@ There are specific tools for admins only to allow them adding movies, movie-sess
 
 For connecting to database, please, enter your MySQL-username and password in db.properties file.
 
-There’s one user already registered with ADMIN role (email = "admin@yahoo.com"", password = 1) and
-one user with USER role (email = "user@yahoo.com"", password = 2).
-Also there are two items in the store: a book and a flower:).
+There’s one user already registered with ADMIN role (email = "admin@yahoo.com"", password = 1).
 
 # <a name="author"></a>Author
 
