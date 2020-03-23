@@ -35,7 +35,7 @@ public class AdminInjectionController {
         roleService.add(userRole);
 
         User admin = new User();
-        admin.setEmail("sofia@yahoo.com");
+        admin.setEmail("admin@yahoo.com");
         admin.setPassword(passwordEncoder.encode("1"));
         admin.addRole(roleService.getByRoleName("ADMIN"));
         userService.add(admin);
