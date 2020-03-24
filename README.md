@@ -3,10 +3,9 @@
 
 
 # purpose
-This is a template for creating an e-cinema. Application is built on REST principles. You can use 
-Postman for testing it.
+This is a template for creating an e-cinema. 
 
-Every user can register according to constraints for email an password, then see all available 
+Every user can register according to constraints for email and password, then see all available 
 movies, choose a movie-session and order a ticket. 
 
 There are specific tools for admins only to allow them adding movies, movie-sessions and 
@@ -30,6 +29,8 @@ Please, configure Tomcat to start the application.
 For connecting to database, please, enter your MySQL-username and password in db.properties file.
 
 There’s one user already registered with ADMIN role (email = admin@yahoo.com, password = 1).
+
+Application is built on REST principles. You can use Postman for testing it.
 
 # author
 
