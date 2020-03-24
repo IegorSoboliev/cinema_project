@@ -2,7 +2,6 @@ package com.dev.cinema.annotations;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

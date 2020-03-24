@@ -3,7 +3,6 @@ package com.dev.cinema.controllers;
 import com.dev.cinema.dto.UserResponseDto;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.UserService;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +17,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public UserResponseDto getUserByEmail(@RequestParam("email") String email) {
         User user = userService.getByEmail(email);
         UserResponseDto userResponseDto = new UserResponseDto();

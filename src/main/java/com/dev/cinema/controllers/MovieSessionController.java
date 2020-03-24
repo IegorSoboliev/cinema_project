@@ -8,14 +8,11 @@ import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.validation.Valid;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +34,7 @@ public class MovieSessionController {
         this.cinemaHallService = cinemaHallService;
     }
 
-    @PostMapping("/moviesession")
+    @PostMapping
     public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto) {
         MovieSession movieSession = new MovieSession();
         Movie movie = movieService.getById(movieSessionRequestDto.getMovieId());
@@ -49,7 +46,7 @@ public class MovieSessionController {
         movieSessionService.add(movieSession);
     }
 
-    @GetMapping("/available")
+    @GetMapping
     public List<MovieSessionResponseDto> getMovieSessions(@RequestParam("movieId") Long movieId,
                                                       @RequestParam("date") LocalDate date) {
         return movieSessionService.findAvailableSessions(movieId, date)

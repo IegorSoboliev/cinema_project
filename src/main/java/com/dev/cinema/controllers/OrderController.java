@@ -9,10 +9,8 @@ import com.dev.cinema.model.User;
 import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +30,13 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping("/order")
+    @PostMapping
     public void completeOrder(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         orderService.completeOrder(user);
     }
 
-    @GetMapping("/userOrders")
+    @GetMapping
     List<OrderDto> getUserOrders(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         return orderService.getOrdersHistory(user)

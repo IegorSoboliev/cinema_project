@@ -2,7 +2,6 @@ package com.dev.cinema.dto;
 
 import com.dev.cinema.annotations.EmailConstraint;
 import com.dev.cinema.annotations.PasswordValuesMatch;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

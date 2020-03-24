@@ -3,7 +3,6 @@ package com.dev.cinema.dto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
 public class OrderDto {

@@ -1,11 +1,9 @@
 package com.dev.cinema.controllers;
 
-import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.model.Role;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.RoleService;
 import com.dev.cinema.service.UserService;
-
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,7 +24,7 @@ public class AdminInjectionController {
     }
 
     @EventListener
-    public String addData(ContextRefreshedEvent event) throws EmailAlreadyRegisteredException {
+    public String addData(ContextRefreshedEvent event)  {
         Role adminRole = new Role();
         adminRole.setRoleName("ADMIN");
         roleService.add(adminRole);
@@ -35,7 +33,7 @@ public class AdminInjectionController {
         roleService.add(userRole);
 
         User admin = new User();
-        admin.setEmail("sofia@yahoo.com");
+        admin.setEmail("admin@yahoo.com");
         admin.setPassword(passwordEncoder.encode("1"));
         admin.addRole(roleService.getByRoleName("ADMIN"));
         userService.add(admin);

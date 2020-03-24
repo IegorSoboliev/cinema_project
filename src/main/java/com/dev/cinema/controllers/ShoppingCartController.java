@@ -13,13 +13,10 @@ import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.validation.Valid;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +41,7 @@ public class ShoppingCartController {
         this.userService = userService;
     }
 
-    @PostMapping("/moviesession")
+    @PostMapping
     public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto,
                                 Authentication authentication) {
         MovieSession movieSession = new MovieSession();
@@ -58,7 +55,7 @@ public class ShoppingCartController {
         shoppingCartService.addSession(movieSession, user);
     }
 
-    @GetMapping("/user-shoppingcart")
+    @GetMapping
     public ShoppingCartResponseDto getByUserId(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);

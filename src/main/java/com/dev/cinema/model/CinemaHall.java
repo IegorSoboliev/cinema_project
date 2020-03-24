@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cinema_hall")
-public class CinemaHall {
+public class  CinemaHall {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;

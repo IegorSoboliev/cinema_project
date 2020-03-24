@@ -7,9 +7,7 @@ import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.Ticket;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.ShoppingCartService;
-
 import java.util.ArrayList;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,7 +45,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart clear(ShoppingCart shoppingCart) {
-        shoppingCart.setTickets(new ArrayList<Ticket>());
+        shoppingCart.setTickets(new ArrayList());
         shoppingCartDao.update(shoppingCart);
         return shoppingCart;
     }
