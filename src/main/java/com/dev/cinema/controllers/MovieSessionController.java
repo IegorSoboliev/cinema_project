@@ -34,7 +34,7 @@ public class MovieSessionController {
         this.cinemaHallService = cinemaHallService;
     }
 
-    @PostMapping("/moviesession")
+    @PostMapping
     public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto) {
         MovieSession movieSession = new MovieSession();
         Movie movie = movieService.getById(movieSessionRequestDto.getMovieId());
@@ -46,7 +46,7 @@ public class MovieSessionController {
         movieSessionService.add(movieSession);
     }
 
-    @GetMapping("/available")
+    @GetMapping
     public List<MovieSessionResponseDto> getMovieSessions(@RequestParam("movieId") Long movieId,
                                                       @RequestParam("date") LocalDate date) {
         return movieSessionService.findAvailableSessions(movieId, date)

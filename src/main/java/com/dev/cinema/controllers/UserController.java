@@ -17,7 +17,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public UserResponseDto getUserByEmail(@RequestParam("email") String email) {
         User user = userService.getByEmail(email);
         UserResponseDto userResponseDto = new UserResponseDto();

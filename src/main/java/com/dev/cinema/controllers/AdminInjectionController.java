@@ -1,6 +1,5 @@
 package com.dev.cinema.controllers;
 
-import com.dev.cinema.exceptions.EmailAlreadyRegisteredException;
 import com.dev.cinema.model.Role;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.RoleService;
@@ -25,7 +24,7 @@ public class AdminInjectionController {
     }
 
     @EventListener
-    public String addData(ContextRefreshedEvent event) throws EmailAlreadyRegisteredException {
+    public String addData(ContextRefreshedEvent event)  {
         Role adminRole = new Role();
         adminRole.setRoleName("ADMIN");
         roleService.add(adminRole);

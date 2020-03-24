@@ -22,7 +22,7 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/authentication")
+    @PostMapping("/login")
     public String login(@RequestBody @Valid UserRequestDto userRequestDto) {
         try {
             authenticationService.login(userRequestDto.getEmail(), userRequestDto.getPassword());

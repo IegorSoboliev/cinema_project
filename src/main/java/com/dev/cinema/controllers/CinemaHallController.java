@@ -21,7 +21,7 @@ public class CinemaHallController {
         this.cinemaHallService = cinemaHallService;
     }
 
-    @PostMapping("/cinemahall")
+    @PostMapping
     public void addCinemaHall(@RequestBody @Valid CinemaHallDto cinemaHallDto) {
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(cinemaHallDto.getCapacity());
@@ -29,7 +29,7 @@ public class CinemaHallController {
         cinemaHallService.add(cinemaHall);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<CinemaHallDto> getAllCinemaHallsDto() {
         return cinemaHallService.getAll()
                 .stream()

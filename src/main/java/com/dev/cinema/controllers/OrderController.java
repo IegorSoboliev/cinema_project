@@ -30,13 +30,13 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping("/order")
+    @PostMapping
     public void completeOrder(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         orderService.completeOrder(user);
     }
 
-    @GetMapping("/user-orders")
+    @GetMapping
     List<OrderDto> getUserOrders(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         return orderService.getOrdersHistory(user)
