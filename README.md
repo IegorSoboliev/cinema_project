@@ -2,13 +2,6 @@
 
 
 
-
-# Table of Contents
-* [Project purpose](#purpose)
-* [Project structure](#structure)
-* [For developer](#developer-start)
-* [Author](#author)
-
 # <a name="purpose"></a>Project purpose
 This is a template for creating an e-cinema. Application is built on REST principles. You can use 
 Postman for testing it.
@@ -34,7 +27,7 @@ cinemahalls.
 
 For connecting to database, please, enter your MySQL-username and password in db.properties file.
 
-There’s one user already registered with ADMIN role (email = "admin@yahoo.com"", password = 1).
+There’s one user already registered with ADMIN role (email = admin@yahoo.com, password = 1).
 
 # <a name="author"></a>Author
 
