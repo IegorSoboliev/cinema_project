@@ -13,8 +13,6 @@
 This is a template for creating an e-cinema. Application is built on REST principles. You can use 
 Postman for testing it.
 
-<hr>
-
 Every user can register according to constraints for email an password, then see all available 
 movies, choose a movie-session and order a ticket. 
 
@@ -40,7 +38,7 @@ There’s one user already registered with ADMIN role (email = "admin@yahoo.com"
 
 # <a name="author"></a>Author
 
-[Iegor Soboliev] (https://github.com/IegorSoboliev)
+Iegor Soboliev https://github.com/IegorSoboliev 
 
 
 

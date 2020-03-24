@@ -55,7 +55,7 @@ public class ShoppingCartController {
         shoppingCartService.addSession(movieSession, user);
     }
 
-    @GetMapping
+    @GetMapping("/user-shoppingcart")
     public ShoppingCartResponseDto getByUserId(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);

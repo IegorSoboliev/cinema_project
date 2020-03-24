@@ -36,7 +36,7 @@ public class OrderController {
         orderService.completeOrder(user);
     }
 
-    @GetMapping
+    @GetMapping("/user-orders")
     List<OrderDto> getUserOrders(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         return orderService.getOrdersHistory(user)
