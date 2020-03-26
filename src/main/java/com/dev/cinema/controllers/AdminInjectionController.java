@@ -24,7 +24,7 @@ public class AdminInjectionController {
     }
 
     @EventListener
-    public String addData(ContextRefreshedEvent event)  {
+    public String addData(ContextRefreshedEvent event) {
         Role adminRole = new Role();
         adminRole.setRoleName("ADMIN");
         roleService.add(adminRole);

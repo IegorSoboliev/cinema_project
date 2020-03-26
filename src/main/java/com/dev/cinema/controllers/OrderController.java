@@ -30,7 +30,7 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/order")
     public void completeOrder(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
         orderService.completeOrder(user);

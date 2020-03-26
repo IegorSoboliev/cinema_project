@@ -34,7 +34,7 @@ public class MovieSessionController {
         this.cinemaHallService = cinemaHallService;
     }
 
-    @PostMapping
+    @PostMapping("/moviesession")
     public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto) {
         MovieSession movieSession = new MovieSession();
         Movie movie = movieService.getById(movieSessionRequestDto.getMovieId());

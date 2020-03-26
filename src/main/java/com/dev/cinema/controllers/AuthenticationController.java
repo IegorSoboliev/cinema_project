@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class AuthenticationController {
-    private AuthenticationService authenticationService;
     private static final Logger LOGGER = Logger.getLogger(AuthenticationController.class);
+    private AuthenticationService authenticationService;
 
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;

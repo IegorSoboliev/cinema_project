@@ -41,7 +41,7 @@ public class ShoppingCartController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/moviesession")
     public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto movieSessionRequestDto,
                                 Authentication authentication) {
         MovieSession movieSession = new MovieSession();
