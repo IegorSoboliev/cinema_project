@@ -2,7 +2,7 @@
 
 
 
-# purpose
+# Purpose
 This is a template for creating an e-cinema. 
 
 Every user can register according to constraints for email and password, then see all available 
@@ -12,7 +12,7 @@ There are specific tools for admins only to allow them adding movies, movie-sess
 cinemahalls.
 <hr>
 
-# structure
+# Structure
 * Java 11
 * Maven 3.8.0
 * Spring 5.2.2.RELEASE (context, orm, webmvc, securiry-core, security-config, security-web)
@@ -22,7 +22,7 @@ cinemahalls.
 * Log4j 1.2.17
 <hr>
 
-# for developer
+# For developer
 
 Please, configure Tomcat to start the application.
 
@@ -32,9 +32,6 @@ There’s one user already registered with ADMIN role (email = admin@yahoo.com, 
 
 Application is built on REST principles. You can use Postman for testing it.
 
-# author
+# Author
 
 Iegor Soboliev https://github.com/IegorSoboliev 
-
-
-
